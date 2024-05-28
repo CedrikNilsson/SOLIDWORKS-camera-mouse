@@ -10,7 +10,7 @@ from adafruit_hid.keycode import Keycode
 # Initialize joystick pins
 x_axis = AnalogIn(board.A1)  # Joystick x-axis
 y_axis = AnalogIn(board.A2)  # Joystick y-axis
-z_axis = AnalogIn(board.A3)  # Zoom control
+z_axis = AnalogIn(board.A0)  # Zoom control
 
 # Initialize buttons
 button_pan = DigitalInOut(board.GP14)
@@ -64,7 +64,7 @@ while True:
         time.sleep(0.1)  # Adjust as needed
         keyboard.release(Keycode.F)
 
-    # Release middle mouse button if absolute value of mouse movement is less or equal to 30
+    # Release middle mouse button if mouse does not move
     if abs(x_movement) <= 1 and abs(y_movement) <= 1:
         mouse.release(Mouse.MIDDLE_BUTTON)
         middle_button_pressed = False
@@ -79,5 +79,8 @@ while True:
 
     # Short delay to avoid flooding the computer with inputs
     time.sleep(0.05)
+    
+    print(x, y, z)
+    time.sleep(0.1)
 
 
